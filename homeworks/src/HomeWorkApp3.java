@@ -1,4 +1,4 @@
-public class HomeWorkApp {
+public class HomeWorkApp3 {
     public static void main(String[] args) {
         System.out.println("print three words");
         printThreeWords();
