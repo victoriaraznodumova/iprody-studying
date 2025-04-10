@@ -1,3 +1,5 @@
+package lesson7;
+
 public class Car {
     private void startElectricity(){}
     private void startCommand(){}
