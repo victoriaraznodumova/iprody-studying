@@ -1,22 +1,22 @@
 package lesson14;
 
 public class AttendanceLog {
-    private String user_id;
+    private String userId;
     private String timestamp;
-    public AttendanceLog(String user_id, String timestamp) {
-        this.user_id = user_id;
+    public AttendanceLog(String userId, String timestamp) {
+        this.userId = userId;
         this.timestamp = timestamp;
     }
     @Override
     public String toString() {
-        return "(\"" + user_id + "\", " +
+        return "(\"" + userId + "\", " +
                 "\"" + timestamp + "\")";
     }
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
     public String getTimestamp() {
         return timestamp;
