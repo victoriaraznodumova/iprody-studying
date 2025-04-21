@@ -31,7 +31,6 @@ public class Main {
         System.out.println("\nfind occurrence");
         System.out.println(findOccurrence(stringList).toString());
     }
-
     public static void countOccurrence(List<String> list, String subString){
         int occurrence = 0;
         for (String word: list) {
@@ -49,57 +48,43 @@ public class Main {
         return arrayList;
     }
     public static List<Integer> findUnique(List<Integer> list){
+        Map<Integer, Integer> uniqueMap = new HashMap<>();
         ArrayList<Integer> uniqueList = new ArrayList<>();
         for(int i = 0; i < list.size(); i++) {
-            int current = list.get(i);
-            int count = 0;
-            for(int j = 0; j < list.size(); j++) {
-                if (list.get(j).equals(current)){
-                    count++;
-                }
-            }
-            if (count == 1){
-                uniqueList.add(current);
+            uniqueMap.put(list.get(i), uniqueMap.getOrDefault(list.get(i), 0) + 1);
+        }
+        for (Integer key: list) {
+            if (uniqueMap.get(key) == 1){
+                uniqueList.add(key);
             }
         }
+        //можно итерироваться по uniqueMap, тогда часть значений может быть отсортированной
+//        for (Map.Entry<Integer, Integer> entry: uniqueMap.entrySet()) {
+//            if (entry.getValue() == 1){
+//                uniqueList.add(entry.getKey());
+//            }
+//        }
+
+        //вариант с явной сортировкой
+        //uniqueList.sort(Comparator.naturalOrder());
         return uniqueList;
     }
     public static void calcOccurrence(List<String> stringList){
-        List<String> processed = new ArrayList<>();
-        String result = "";
+        Map<String, Integer> occurrenceMap = new HashMap<>();
         for(int i = 0; i < stringList.size(); i++) {
-            String current = stringList.get(i);
-            if (processed.contains(current))
-                continue;
-            int count = 0;
-            for(int j = 0; j < stringList.size(); j++) {
-                if (stringList.get(j).equals(current)){
-                    count++;
-                }
-            }
-            processed.add(current);
-            result = result + current + ": " + count + ", ";
+            occurrenceMap.put(stringList.get(i), occurrenceMap.getOrDefault(stringList.get(i), 0) + 1);
         }
-        System.out.println(result);
+        System.out.println(occurrenceMap);
     }
     public static ArrayList<WordOccurrence> findOccurrence(List<String> stringList){
-        ArrayList<WordOccurrence> wordOccurrences = new ArrayList<>();
-        List<String> processed = new ArrayList<>();
-        String result = "";
+        ArrayList<WordOccurrence> wordOccurrences2 = new ArrayList<>();
+        Map<String, Integer> occurrenceMap = new HashMap<>();
         for(int i = 0; i < stringList.size(); i++) {
-            String current = stringList.get(i);
-            if (processed.contains(current))
-                continue;
-            int count = 0;
-            for(int j = 0; j < stringList.size(); j++) {
-                if (stringList.get(j).equals(current)){
-                    count++;
-                }
-            }
-            processed.add(current);
-            result = result + current + ": " + count + ", ";
-            wordOccurrences.add(new WordOccurrence(current, count));
+            occurrenceMap.put(stringList.get(i), occurrenceMap.getOrDefault(stringList.get(i), 0) + 1);
         }
-        return wordOccurrences;
+        for (Map.Entry<String, Integer> ent: occurrenceMap.entrySet()) {
+            wordOccurrences2.add(new WordOccurrence(ent.getKey(), ent.getValue()));
+        }
+        return wordOccurrences2;
     }
 }
