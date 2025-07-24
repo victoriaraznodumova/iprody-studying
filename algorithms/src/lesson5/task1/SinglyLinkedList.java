@@ -16,14 +16,17 @@ public class SinglyLinkedList {
     }
     public int[] add(int[] input, int element){
         if (size >= input.length) {
-            int newCapacity = (int) Math.round(size * 1.5 + 1);
-            int[] destArray = new int[newCapacity];
-            System.arraycopy(input, 0, destArray, 0, input.length);
-            array = destArray;
+            relocate(input);
         }
         array[size] = element;
         size++;
         return Arrays.copyOfRange(array, 0, size);
+    }
+    public void relocate(int[] input){
+        int newCapacity = (int) Math.round(size * 1.5 + 1);
+        int[] destArray = new int[newCapacity];
+        System.arraycopy(input, 0, destArray, 0, input.length);
+        array = destArray;
     }
     public int get(int[] array, int index) throws Exception {
         if (index >= size) {
